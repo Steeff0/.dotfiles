@@ -1,2 +1,2 @@
-# use relative numbering instead of absolute
+" use relative numbering instead of absolute
 set relativenumber
