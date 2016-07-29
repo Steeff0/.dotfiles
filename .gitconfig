@@ -1,0 +1,16 @@
+[user]
+        name = Marc Theunissen
+        email = mtheunissen82@gmail.com
+[push]
+        default = simple
+[core]
+        eol = lf
+        editor = vim
+        fileMode = false
+[alias]
+        l = log --all --pretty=oneline --graph --abbrev-commit --decorate
+        s = status
+        ml = log --all --graph --pretty=format:\"%h %C(auto)%d %s [%Cgreen%ce%Creset @ %ci]\"
+[color]
+        ui = true
+
