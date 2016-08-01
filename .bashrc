@@ -26,8 +26,3 @@ alias gf='git fetch'
 #alias merge='git mergetool'
 alias gfs='git fetch -av && git status -v'
 
-# functions
-# lich is a combination of less and which
-lich() {
-     less `which $1`
-}
