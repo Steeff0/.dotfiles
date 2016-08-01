@@ -25,3 +25,7 @@ imap <right> <nop>
 " Create shortcut for Esc in insert mode
 imap jk <esc>
 imap kj <esc>
+
+" Shortcut for easy navigating to begin/end of line
+nmap aa ^
+nmap ;; $
