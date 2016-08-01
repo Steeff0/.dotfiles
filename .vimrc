@@ -21,3 +21,7 @@ imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
+
+" Create shortcut for Esc in insert mode
+imap jk <esc>
+imap kj <esc>
