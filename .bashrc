@@ -14,7 +14,7 @@ alias mkdir='mkdir -p'
 alias cl='clear'
 alias sushigo='eval $(ssh-agent) && ssh-add'
 alias v='vim'
-alias ls='ls -la'
+alias ls='ls -la --color=auto'
 export HISTTIMEFORMAT="%d-%m-%y %T "
 
 # git
