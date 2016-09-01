@@ -7,6 +7,9 @@ filetype plugin indent on
 " Use relative numbering instead of absolute
 set relativenumber
 
+" Always have 5 lines above or below the cursor when scrolling
+set scrolloff=5
+
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
