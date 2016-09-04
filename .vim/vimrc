@@ -16,6 +16,9 @@ command Wq wq
 command W w
 command Q q
 
+" Add shortcut for saving readonly files
+command WW :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
 " Map F5 to list and select buffers
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
