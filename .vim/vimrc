@@ -7,6 +7,9 @@ filetype plugin indent on
 " Use relative numbering instead of absolute
 set relativenumber
 
+" Change <Leader> to space
+let mapleader=" "
+
 " Always have 5 lines above or below the cursor when scrolling
 set scrolloff=5
 
