@@ -37,6 +37,12 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
+" Enable arrow window navigation in normal mode
+nmap <up> <C-W>k
+nmap <down> <C-W>j
+nmap <left> <C-W>h
+nmap <right> <C-W>l
+
 " Create shortcut for Esc in insert mode
 imap jk <esc>
 imap kj <esc>
