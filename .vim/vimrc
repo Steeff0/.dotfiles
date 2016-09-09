@@ -13,6 +13,8 @@ let mapleader=" "
 " Always have 5 lines above or below the cursor when scrolling
 set scrolloff=5
 
+" When minimizing a window make it as small as possible
+set winminwidth=0
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
