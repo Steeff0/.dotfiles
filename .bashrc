@@ -39,12 +39,19 @@ alias gp='git push'
 #alias merge='git mergetool'
 alias gfs='git fetch -av && git status -v'
 
+# Replacement for composer without xdebug enabled
 composer() { 
-sudo mv /etc/php.d/xdebug.ini /etc/php.d/xdebug.ini-backup 
-command composer $@
-STATUS=$?
-sudo mv /etc/php.d/xdebug.ini-backup /etc/php.d/xdebug.ini 
-return $STATUS
+	sudo mv /etc/php.d/xdebug.ini /etc/php.d/xdebug.ini-backup 
+	command composer $@
+	STATUS=$?
+	sudo mv /etc/php.d/xdebug.ini-backup /etc/php.d/xdebug.ini 
+	return $STATUS
 }
 
 alias composer=composer
+
+# Shorcut function for git add, git commit, git push
+gacp() {
+	git add . && git commit -m "$1" && git push
+}
+
