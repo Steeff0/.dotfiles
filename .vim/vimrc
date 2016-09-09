@@ -13,8 +13,9 @@ let mapleader=" "
 " Always have 5 lines above or below the cursor when scrolling
 set scrolloff=5
 
-" When minimizing a window make it as small as possible
-set winminwidth=0
+" When minimizing a window make it as small as possible (only show filename in
+" bar)
+set winminheight=0
 
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
@@ -50,6 +51,9 @@ nmap <right> <C-W>l
 " fullscreen, minimalize the others
 nmap <A-up> <C-W>k <C-W>_
 nmap <A-down> <C-W>j <C-W>_
+
+" Shorcut for making all windows equal sized
+nmap <A-=> <C-W>=
 
 " Create shortcut for Esc in insert mode
 imap jk <esc>
