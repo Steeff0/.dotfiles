@@ -15,6 +15,7 @@ set scrolloff=5
 
 " When minimizing a window make it as small as possible
 set winminwidth=0
+
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
@@ -25,7 +26,7 @@ command Q q
 command WW :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " Map F5 to list and select buffers
-nnoremap <F5> :buffers<CR>:buffer<Space>
+map <F5> :buffers<CR>:buffer<Space>
 
 " Disable Arrow keys in normal, visual and select and operator pending mode (hjkl training)
 map <up> <nop>
@@ -44,6 +45,11 @@ nmap <up> <C-W>k
 nmap <down> <C-W>j
 nmap <left> <C-W>h
 nmap <right> <C-W>l
+
+" Enable (up/down) arrow window navigation with ALT key and make the current window
+" fullscreen, minimalize the others
+nmap <A-up> <C-W>k <C-W>_
+nmap <A-down> <C-W>j <C-W>_
 
 " Create shortcut for Esc in insert mode
 imap jk <esc>
