@@ -55,10 +55,12 @@ nmap <A-down> <C-W>j <C-W>_
 " Shorcut for making all windows equal sized
 nmap <A-=> <C-W>=
 
-" Create shortcut for Esc in insert mode
-imap jk <esc>
-imap kj <esc>
+" Create shortcut for Esc in insert mode (`^ makes sure the cursor stays at
+" the same position as before the Esc)
+imap jk <esc> `^
+imap kj <esc> `^
 
 " Shortcut for easy navigating to begin/end of line
 nmap aa ^
 nmap ;; $
+
