@@ -60,8 +60,9 @@ nmap <A-=> <C-W>=
 
 " Create shortcut for Esc in insert mode (`^ makes sure the cursor stays at
 " the same position as before the Esc)
-imap jk <esc> `^
-imap kj <esc> `^
+imap jk <Esc>
+imap kj <Esc>
+inoremap <Esc> <Esc>`^
 
 " Shortcut for easy navigating to begin/end of line
 nmap aa ^
