@@ -10,6 +10,9 @@ set relativenumber
 " Change <Leader> to space
 let mapleader=" "
 
+" Change tabs to 4 spaces
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
 " Always have 5 lines above or below the cursor when scrolling
 set scrolloff=5
 
