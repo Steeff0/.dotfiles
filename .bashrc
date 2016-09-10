@@ -26,6 +26,7 @@ alias cl='clear'
 alias sushigo='eval $(ssh-agent) && ssh-add'
 alias v='vim'
 alias ls='ls -la --color=auto'
+alias clipkey='cat ~/.ssh/id_rsa.pub > /dev/clipboard'
 export HISTTIMEFORMAT="%d-%m-%y %T "
 
 # git
