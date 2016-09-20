@@ -1,18 +1,7 @@
-# .bashrc
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-  . /etc/bashrc
-fi
-
-# User specific aliases and functions
-export PATH=$HOME/.config/composer/vendor/bin:$PATH
-export GIT_SSL_NO_VERIFY=true
-
-#shell options
+# Shell options
 shopt -s autocd
 
-# general
+# General
 alias cd..='cd ..'
 alias ..='cd ..'
 alias .2='cd ../..'
@@ -30,30 +19,15 @@ alias ls='ls -la --color=auto'
 alias clipkey='cat ~/.ssh/id_rsa.pub > /dev/clipboard'
 export HISTTIMEFORMAT="%d-%m-%y %T "
 
-# git
-alias ga='git add'
-alias gs='git status'
-alias gc='git commit'
-alias gl='git l'
-alias gf='git fetch --all'
-alias gp='git push'
-#alias diff='git difftool'
-#alias merge='git mergetool'
-alias gfs='git fetch -av && git status -v'
-
-# Replacement for composer without xdebug enabled
-composer() { 
-	sudo mv /etc/php.d/xdebug.ini /etc/php.d/xdebug.ini-backup 
-	command composer $@
-	STATUS=$?
-	sudo mv /etc/php.d/xdebug.ini-backup /etc/php.d/xdebug.ini 
-	return $STATUS
+# Create g<alias> shortcuts for all git aliases and enable git autocompletion
+function_exists() {
+    declare -f -F $1 > /dev/null
+    return $?
 }
 
-alias composer=composer
+for al in `__git_aliases`; do
+    alias g$al="git $al"
 
-# Shorcut function for git add, git commit, git push
-gacp() {
-	git add . && git commit -m "$1" && git push
-}
-
+    complete_func=_git_$(__git_aliased_command $al)
+    function_exists $complete_fnc && __git_complete g$al $complete_func
+done
