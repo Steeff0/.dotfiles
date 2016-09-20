@@ -19,6 +19,7 @@
         co = checkout
         br = branch
         d = diff
+        ds = diff --stat
         dc = diff --cached
 
         ; Log
