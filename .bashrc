@@ -30,6 +30,7 @@ alias v='vim'
 alias clipkey='cat ~/.ssh/id_rsa.pub > /dev/clipboard'
 
 # History
+history -a
 shopt -s histappend
 export HISTFILESIZE=1000000
 export HISTSIZE=100000
