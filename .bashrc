@@ -6,6 +6,11 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
+# Enable bash completion in interactive shells
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
 # Shell options
 shopt -s globstar
 shopt -s checkwinsize
