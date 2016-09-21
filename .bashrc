@@ -46,10 +46,10 @@ my_prompt() {
 
     if [ -n "$branch" ]
     then
-      branch_addition="@\[\e;5;202m\]${branch}\[\e[0m\]"
+      branch_addition=" [\[\e;5;202m\]${branch}\[\e[0m\]]"
     fi
 
-    export PS1="\u:\w${branch_addition}\\$ "
+    export PS1="\u@\h:\w${branch_addition}\\$ "
 }
 
 PROMPT_COMMAND=my_prompt
