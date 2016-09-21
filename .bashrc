@@ -35,7 +35,7 @@ export HISTFILESIZE=1000000
 export HISTSIZE=100000
 export HISTCONTROL=ignorespace
 export HISTIGNORE='ls:history:ll'
-export HISTTIMEFORMAT='%d-%m-%Y %T'
+export HISTTIMEFORMAT='%d-%m-%Y %T '
 
 # Git
 # Create g<alias> shortcuts for all git aliases and enable git autocompletion
