@@ -10,7 +10,7 @@
 [alias]
         ; General shortcuts
         s = status --short
-        sv = = status --verbose
+        sv = status --verbose
         c = commit
         a = add
         ai = add --interactive
