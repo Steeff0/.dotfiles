@@ -9,7 +9,8 @@
         fileMode = false
 [alias]
         ; General shortcuts
-        s = status -s
+        s = status --short
+        sv = = status --verbose
         c = commit
         ga = add
         gai = add --interactive
