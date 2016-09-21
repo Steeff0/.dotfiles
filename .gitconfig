@@ -12,9 +12,9 @@
         s = status --short
         sv = = status --verbose
         c = commit
-        ga = add
-        gai = add --interactive
-        gap = add --patch
+        a = add
+        ai = add --interactive
+        ap = add --patch
         cp = cherry-pick
         cl = clone
         co = checkout
