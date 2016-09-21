@@ -3,6 +3,10 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
+# Shell options
+shopt -s globstar
+shopt -s checkwinsize
+
 # Navigation
 shopt -s autocd
 alias cd..='cd ..'
