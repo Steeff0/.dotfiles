@@ -68,3 +68,5 @@ inoremap <Esc> <Esc>`^
 nmap aa ^
 nmap ;; $
 
+" NERDTree plugin
+let NERDTreeShowHidden=1
