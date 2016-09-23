@@ -24,6 +24,9 @@ set scrolloff=5
 " When minimizing a window make it as small as possible
 set winminheight=0
 
+" Always show the status line
+set laststatus=2
+
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
