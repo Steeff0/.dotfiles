@@ -27,6 +27,10 @@ set winminheight=0
 " Always show the status line
 set laststatus=2
 
+" Dont use case-sensitive search (use smartcase when explicit case-sensitive is needed)
+set ignorecase
+set smartcase
+
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
