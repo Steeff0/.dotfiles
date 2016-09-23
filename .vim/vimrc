@@ -77,3 +77,6 @@ nmap ;; $
 
 " NERDTree plugin
 let NERDTreeShowHidden=1
+
+" CtrlP plugin
+let g:ctrlp_show_hidden = 1
