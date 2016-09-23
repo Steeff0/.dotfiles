@@ -11,6 +11,7 @@
     ; General shortcuts
     s = status --short
     sv = status --verbose
+    sh = show --patch-with-stat
     a = add
     ai = add --interactive
     ap = add --patch
