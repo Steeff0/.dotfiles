@@ -27,6 +27,9 @@ set winminheight=0
 " Always show the status line
 set laststatus=2
 
+" Enable search highlighting
+set hlsearch
+
 " Dont use case-sensitive search (use smartcase when explicit case-sensitive is needed)
 set ignorecase
 set smartcase
