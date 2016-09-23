@@ -66,3 +66,13 @@
 [color]
         ui = true
 
+[diff]
+        tool = vimdiff
+[merge]
+        tool = vimdiff
+        conflictstyle = diff3
+        keepBackup = false
+[mergetool]
+        prompt = false
+[difftool]
+        prompt = false
