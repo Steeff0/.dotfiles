@@ -19,7 +19,7 @@
         cl = clone
         co = checkout
         br = branch
-        d = diff
+        d = diff --patch-with-stat
         ds = diff --stat
         dc = diff --cached
 
