@@ -75,3 +75,5 @@
     prompt = false
 [difftool]
     prompt = false
+[help]
+	autocorrect = 50
