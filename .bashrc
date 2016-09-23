@@ -26,6 +26,7 @@ alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../../'
 alias .4='cd ../../../..'
+alias -- -="cd -"
 
 # Various
 alias h='history'
@@ -37,6 +38,7 @@ alias cl='clear'
 alias sshgo='eval $(ssh-agent) && ssh-add'
 alias v='vim'
 alias clipkey='cat ~/.ssh/id_rsa.pub > /dev/clipboard'
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # History
 history -a
@@ -60,6 +62,11 @@ for al in `__git_aliases`; do
     complete_func=_git_$(__git_aliased_command $al)
     function_exists $complete_func && __git_complete g$al $complete_func
 done
+
+# Create a new directory and enter it
+function mkd() {
+    mkdir -p "$@" && cd "$_";
+}
 
 # Customize prompt PS1
 my_prompt() {
