@@ -83,6 +83,7 @@ nmap aa ^
 nmap ;; $
 
 " NERDTree plugin
+map <Leader>e :NERDTree<CR>
 let NERDTreeShowHidden=1
 
 " CtrlP plugin
