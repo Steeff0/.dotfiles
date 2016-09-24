@@ -56,8 +56,8 @@
     f = "!git ls-files | grep -i"
 
     ; Grep files
-    grep = grep -Ii
-    gr = grep -Ii
+    grep = grep -Iin
+    gr = grep -Iin
 
     ; Combinations
     ; fetch and status
