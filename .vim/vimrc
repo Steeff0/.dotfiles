@@ -93,4 +93,5 @@ map <Leader>e :NERDTree<CR>
 let NERDTreeShowHidden=1
 
 " CtrlP plugin
+map <Leader>p :CtrlP<CR>
 let g:ctrlp_show_hidden = 1
