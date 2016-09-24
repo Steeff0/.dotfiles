@@ -40,6 +40,9 @@ command Wq wq
 command W w
 command Q q
 
+" Type qq when you want to quit all open windows
+cmap qq qa
+
 " Add shortcut for saving readonly files
 command WW :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
