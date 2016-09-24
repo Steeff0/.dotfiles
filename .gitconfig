@@ -20,9 +20,13 @@
     cl = clone
     co = checkout
     br = branch
+
+    ; Diff and merge
     d = diff --patch-with-stat
     ds = diff --stat
     dc = diff --cached
+    dt = difftool
+    mt = mergetool
 
     ; Commit
     c = commit
