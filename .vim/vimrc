@@ -12,6 +12,9 @@ colorscheme hybrid
 " Use relative numbering instead of absolute
 set relativenumber
 
+" Allow buffers to be hidden (unsaved) when closing a window
+set hidden
+
 " Change <Leader> to space
 let mapleader=" "
 
