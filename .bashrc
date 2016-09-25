@@ -85,6 +85,6 @@ PROMPT_COMMAND=my_prompt
 
 # List bash aliases
 la() {
-    # Currently all my alaises are in .bashrc
+    # Currently all my aliases are in .bashrc
     grep "^alias" ~/.bashrc  | cut -c 7- | sort
 }
