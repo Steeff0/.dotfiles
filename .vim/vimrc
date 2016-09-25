@@ -88,8 +88,8 @@ imap kj <Esc>
 inoremap <Esc> <Esc>`^
 
 " Shortcut for easy navigating to begin/end of line
-nmap aa ^
-nmap ;; $
+map aa ^
+map ;; $
 
 " NERDTree plugin
 map <Leader>e :NERDTree<CR>
