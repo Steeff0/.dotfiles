@@ -81,4 +81,4 @@
 [difftool]
     prompt = false
 [help]
-	autocorrect = 50
+    autocorrect = 50
