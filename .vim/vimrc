@@ -1,8 +1,23 @@
-runtime bundle/vim-pathogen/autoload/pathogen.vim
+set nocompatible
+filetype off
 
-execute pathogen#infect()
-syntax on
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-pathogen.git'
+Plugin 'tpope/vim-surround.git'
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'sickill/vim-monokai.git'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'ctrlpvim/ctrlp.vim.git'
+Plugin 'w0ng/vim-hybrid.git'
+Plugin 'vim-airline/vim-airline'
+Plugin 'easymotion/vim-easymotion.git'
+
+call vundle#end()
 filetype plugin indent on
+syntax on
 
 " Enable theme
 syntax enable
