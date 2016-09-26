@@ -14,6 +14,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'honza/vim-snippets'
 
 " Themes
 Plugin 'sickill/vim-monokai'
