@@ -3,17 +3,21 @@ filetype off
 
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
+" Plugins
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-pathogen.git'
-Plugin 'tpope/vim-surround.git'
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'sickill/vim-monokai.git'
-Plugin 'scrooloose/nerdcommenter.git'
-Plugin 'ctrlpvim/ctrlp.vim.git'
-Plugin 'w0ng/vim-hybrid.git'
+Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'easymotion/vim-easymotion.git'
+Plugin 'easymotion/vim-easymotion'
+
+" Themes
+Plugin 'sickill/vim-monokai'
+Plugin 'w0ng/vim-hybrid'
 
 call vundle#end()
 filetype plugin indent on
