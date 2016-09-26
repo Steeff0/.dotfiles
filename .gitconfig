@@ -1,6 +1,6 @@
-[user]
-    name = Marc Theunissen
-    email = mtheunissen82@gmail.com
+[include]
+    ; Include local settings
+    path = ~/.gitconfig.local
 [push]
     default = simple
 [core]
