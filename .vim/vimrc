@@ -5,10 +5,10 @@ runtime plugged/vim-plug/plug.vim
 call plug#begin('~/.vim/plugged')
 
 " Plugins
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -126,10 +126,6 @@ map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **/.*" <Bar> cw<CR
 map <Leader>e :NERDTree<CR>
 let NERDTreeShowHidden=1
 
-" CtrlP plugin
-map <Leader>p :CtrlP<CR>
-let g:ctrlp_show_hidden = 1
-
 " incsearch.vim plugin
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -144,3 +140,7 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+" fzf plugin
+let $FZF_DEFAULT_COMMAND = 'find . -type f | grep -v "cache/" | grep -v "\.git/" | grep -v "\.mat$"'
+nnoremap <silent> <C-P> :FZF -x<CR>
