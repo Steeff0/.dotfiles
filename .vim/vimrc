@@ -94,6 +94,12 @@ nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-l> <C-W>l
 
+" Window resizing with arrow keys
+nmap <Up> <C-W>-
+nmap <Down> <C-W>+
+nmap <Left> <C-W>>
+nmap <Right> <C-W><
+
 " Enable (up/down) arrow window navigation with ALT key and make the current window
 " fullscreen, minimalize the others
 nmap <A-up> <C-W>k <C-W>_
