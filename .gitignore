@@ -1,2 +1,2 @@
 .gitconfig.local
-.vim/bundle/*
+.vim/plugged/*
