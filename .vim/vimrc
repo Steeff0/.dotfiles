@@ -113,6 +113,7 @@ nmap <A-=> <C-W>=
 " the same position as before the Esc)
 imap jk <Esc>
 imap kj <Esc>
+imap <Tab> <Esc>
 inoremap <Esc> <Esc>`^
 
 " Shortcut for easy navigating to begin/end of line
