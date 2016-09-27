@@ -11,6 +11,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# Source fzf.bash for fuzzy search
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Export localization variables
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
