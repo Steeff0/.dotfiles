@@ -5,7 +5,6 @@ runtime plugged/vim-plug/plug.vim
 call plug#begin('~/.vim/plugged')
 
 " Plugins
-Plug 'VundleVim/Vundle.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
