@@ -85,6 +85,11 @@ set smartcase
 set splitbelow
 set splitright
 
+" Enable enhance menu when autocompleting (with <Tab>) on the commandline
+" Ignore case when completing file/dir names
+set wildmenu
+set wildignorecase
+
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
@@ -169,3 +174,4 @@ map g# <Plug>(incsearch-nohl-g#)
 " fzf plugin
 let $FZF_DEFAULT_COMMAND = 'find . -type f | grep -v "cache/" | grep -v "\.git/" | grep -v "\.mat$"'
 nnoremap <silent> <C-P> :FZF -x<CR>
+nmap <Leader>p :FZF -x<CR>
