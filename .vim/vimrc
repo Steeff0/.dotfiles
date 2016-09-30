@@ -23,6 +23,10 @@ Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 
+" Set internal encoding and default encoding for files to utf-8
+set encoding=utf-8
+setglobal fileencoding=utf-8
+
 filetype plugin indent on
 syntax on
 
@@ -30,6 +34,18 @@ syntax on
 syntax enable
 set background=dark
 colorscheme hybrid
+
+" Increase the number of history lines that are remembered
+set history=1000
+
+" Decrease the timeout to wait for mappings
+set timeoutlen=350
+
+" In absence of the statusline show the ruler
+set ruler
+
+" Dont wrap lines
+set nowrap
 
 " Use relative numbering instead of absolute
 set relativenumber
@@ -39,6 +55,9 @@ set hidden
 
 " Change <Leader> to space
 let mapleader=" "
+
+" Let vim help me with indenting
+set smartindent
 
 " Change tabs to 4 spaces
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -61,6 +80,10 @@ set hlsearch
 " Dont use case-sensitive search (use smartcase when explicit case-sensitive is needed)
 set ignorecase
 set smartcase
+
+" When using :split pop new window below and when using :vsplit insert new window right
+set splitbelow
+set splitright
 
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
@@ -125,7 +148,8 @@ map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **/.*" <Bar> cw<CR
 
 " NERDTree plugin
 map <Leader>e :NERDTree<CR>
-let NERDTreeShowHidden=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeWinSize=50
 
 " incsearch.vim plugin
 map /  <Plug>(incsearch-forward)
