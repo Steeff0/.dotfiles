@@ -9,6 +9,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -172,6 +173,9 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 " fzf plugin
-let $FZF_DEFAULT_COMMAND = 'find . -type f | grep -v "cache/" | grep -v "\.git/" | grep -v "\.mat$"'
+let $FZF_DEFAULT_COMMAND = 'ag --all-types --hidden --ignore-case -g ""'
 nnoremap <silent> <C-P> :FZF -x<CR>
 nmap <Leader>p :FZF -x<CR>
+
+" vim.ack plugin
+:let g:ackprg = 'ag --all-types --ignore-case --hidden --vimgrep'
