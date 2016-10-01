@@ -12,11 +12,11 @@ Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'stephpy/vim-php-cs-fixer'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
-Plug 'stephpy/vim-php-cs-fixer'
 
 " Themes
 Plug 'sickill/vim-monokai'
