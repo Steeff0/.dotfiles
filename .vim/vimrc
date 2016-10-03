@@ -94,6 +94,9 @@ set splitright
 set wildmenu
 set wildignorecase
 
+" Save on buffer switch
+set autowrite
+
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
