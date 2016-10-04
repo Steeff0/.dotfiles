@@ -158,6 +158,14 @@ map ;; $
 " Grep word under cursor recursively
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **/.*" <Bar> cw<CR
 
+" Add highlighting of trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 " NERDTree plugin
 map <Leader>e :NERDTree<CR>
 let g:NERDTreeShowHidden=1
