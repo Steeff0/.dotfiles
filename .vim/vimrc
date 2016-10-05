@@ -176,7 +176,7 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType php,javascript,twig,yml,html,xml,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " NERDTree plugin
 map <Leader>e :NERDTreeToggle<CR>
