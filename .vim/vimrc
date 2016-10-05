@@ -179,7 +179,7 @@ endfun
 autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " NERDTree plugin
-map <Leader>e :NERDTree<CR>
+map <Leader>e :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeWinSize=50
 " Close vim when NERDTree is the only window left open
