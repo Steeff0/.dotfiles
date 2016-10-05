@@ -182,6 +182,8 @@ autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <
 map <Leader>e :NERDTree<CR>
 let g:NERDTreeShowHidden=1
 let g:NERDTreeWinSize=50
+" Close vim when NERDTree is the only window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " incsearch.vim plugin
 map /  <Plug>(incsearch-forward)
