@@ -112,6 +112,10 @@ cmap qq qa
 " Add shortcut for saving readonly files
 command WW :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
+" Make Tab and Backspace in normal mode behave the same as in insert mode
+nmap <Tab> i<Tab><Esc>
+nmap <Bs> i<Bs><Esc>
+
 " Map F5 to list and select buffers
 map <F5> :buffers<CR>:buffer<Space>
 
