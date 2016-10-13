@@ -3,7 +3,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-  . /etc/bashrc
+    . /etc/bashrc
 fi
 
 # Enable bash completion in interactive shells
@@ -79,7 +79,7 @@ my_prompt() {
 
     if [ -n "$branch" ]
     then
-      branch_addition=" [\[\e[38;5;202m\]${branch}\[\e[0m\]]"
+        branch_addition=" [\[\e[38;5;202m\]${branch}\[\e[0m\]]"
     fi
 
     export PS1="\u@\h:\[\e[38;5;57m\]\w\[\e[0m\]${branch_addition} \\$ "
