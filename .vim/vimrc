@@ -170,6 +170,11 @@ nnoremap k gk
 " Always do global search by default
 set gdefault
 
+" By default apply 'very magic' search
+" All ASCII characters except '0'-'9', 'a'-'z', 'A'-'Z' and '_' have a special meaning.
+nnoremap / /\v
+vnoremap / /\v
+
 " Easy access to command mode
 nnoremap ; :
 
@@ -217,6 +222,7 @@ map g/ <Plug>(incsearch-stay)
 " :h g:incsearch#auto_nohlsearch
 " set hlsearch (already set above)
 let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#magic = '\v'
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
