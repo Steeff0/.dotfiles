@@ -8,6 +8,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -17,6 +18,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-scripts/YankRing.vim'
 
 " Themes
 Plug 'sickill/vim-monokai'
@@ -161,6 +163,19 @@ inoremap <Esc> <Esc>`^
 map aa ^
 map ;; $
 
+" Make j/k realy move one line down/up
+nnoremap j gj
+nnoremap k gk
+
+" Always do global search by default
+set gdefault
+
+" Easy access to command mode
+nnoremap ; :
+
+" Save all files on losing focus:
+autocmd FocusLost * :wa
+
 " Grep word under cursor recursively
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **/.*" <Bar> cw<CR
 
@@ -216,3 +231,6 @@ nmap <Leader>p :FZF -x<CR>
 
 " vim.ack plugin
 :let g:ackprg = 'ag --all-types --ignore-case --hidden --vimgrep'
+
+" rainbow plugin
+let g:rainbow_active = 1
