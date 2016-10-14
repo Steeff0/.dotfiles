@@ -104,6 +104,12 @@ set wildignorecase
 " Save on buffer switch
 set autowrite
 
+" Fancy c(hange) visualization
+set cpoptions+=$
+
+" I want to be able to go anywhere with my cursor
+set virtualedit=all
+
 " Fix my frequently wrong typed Wq (etc.) when quiting vim
 command WQ wq
 command Wq wq
