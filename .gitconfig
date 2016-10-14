@@ -53,6 +53,7 @@
     sl = stash list
     sa = stash apply
     ss = stash save
+    sd = stash drop
 
     ; List aliases
     la = "!git config -l | grep alias | cut -c 7-"
