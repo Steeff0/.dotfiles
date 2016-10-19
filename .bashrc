@@ -68,7 +68,7 @@ for al in `__git_aliases`; do
 done
 
 # Create a new directory and enter it
-function mkd() {
+mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
@@ -91,4 +91,9 @@ PROMPT_COMMAND=my_prompt
 la() {
     # Currently all my aliases are in .bashrc
     grep "^alias" ~/.bashrc  | cut -c 7- | sort
+}
+
+# Generate a random password
+randpasswd() {
+    tr -dc a-zA-Z0-9 < /dev/urandom | head -c${1:-32}; echo 1>&2;
 }
