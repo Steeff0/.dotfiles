@@ -1,6 +1,9 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# Set terminal title through xterm control sequence
+echo -ne "\e]0;$(hostname)\a"
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
