@@ -11,8 +11,7 @@
     ; General shortcuts
     s = status --short
     sv = status --verbose
-    sh = "!f() { git show $1 --patch-with-stat --color | diff-so-fancy | less --raw-control-chars; }; f"
-    sssh = show --patch-with-stat
+    sh = "!f() { git show --patch-with-stat --color "$@" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     a = add
     ai = add --interactive
     ap = add --patch
@@ -23,9 +22,9 @@
     br = branch
 
     ; Diff and merge
-    d = "!f() { git diff $1 --patch-with-stat --color | diff-so-fancy | less --raw-control-chars; }; f"
+    d = "!f() { git diff --patch-with-stat --color "$@" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     ds = diff --stat
-    dc = "!f() { git diff $1 --cached --color | diff-so-fancy | less --raw-control-chars; }; f"
+    dc = "!f() { git diff --cached --color "$@" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     dt = difftool
     mt = mergetool
 
@@ -94,3 +93,5 @@
     prompt = false
 [help]
     autocorrect = 50
+[diff-so-fancy]
+    stripLeadingSymbols = false
