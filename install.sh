@@ -1,22 +1,87 @@
 #!/bin/env bash
 
-if [[ -f ~/.bashrc ]]; then
-    mv ~/.bashrc ~/.bashrc.old
+PARAMS=( "$@" )
+
+if [[ $# -eq 0 ]]; then
+  echo "Error: No parameter."
+  echo "Pls add paramater what module to install."
+  exit 1
 fi
 
-if [[ -f ~/.gitconfig ]]; then
+install_bash() {
+  #if an old bashrc file exists make a backup of it
+  if [[ -f ~/.bashrc ]]; then
+      mv ~/.bashrc ~/.bashrc.old
+  fi
+
+  #Move own bashrc to default location
+  ln -s ~/.dotfiles/.bashrc ~/.bashrc
+}
+
+install_gitconfig() {
+  #if an old bashrc file exists make a backup of it
+  if [[ -f ~/.gitconfig ]]; then
     mv ~/.gitconfig ~/.gitconfig.old
-fi
+  fi
 
-if [[ -f ~/.vim ]]; then
+  #Move own bashrc to default location
+  ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+}
+
+install_vim() {
+  #if an old bashrc file exists make a backup of it
+  if [[ -f ~/.vim ]]; then
     mv ~/.vim ~/.vim.old
-fi
+  fi
 
-if [[ -f ~/.vimrc ]]; then
+  #Move own bashrc to default location
+  ln -s ~/.dotfiles/.vim ~/.vim
+}
+
+install_vimrc() {
+  #if an old bashrc file exists make a backup of it
+  if [[ -f ~/.vimrc ]]; then
     mv ~/.vimrc ~/.vimrc.old
-fi
+  fi
 
-ln -s ~/.dotfiles/.bashrc ~/.bashrc
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/.vim ~/.vim
-ln -s ~/.dotfiles/.vim/vimrc ~/.vimrc
+  #Move own bashrc to default location
+  ln -s ~/.dotfiles/.vim/vimrc ~/.vimrc
+}
+
+install_minttyrc() {
+  #if an old bashrc file exists make a backup of it
+  if [[ -f ~/.minttyrc ]]; then
+    mv ~/.minttyrc ~/.minttyrc.old
+  fi
+
+  #Move own bashrc to default location
+  ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
+}
+
+# Switch over input parameters and determine logic to execute
+for PARAM in $PARAMS
+do
+
+  case $PARAM in
+    "bash")
+      install_bash
+      ;;
+    "gitconfig")
+      install_gitconfig
+      ;;
+    "vim")
+      install_vim
+      ;;
+    "vimrc")
+      install_vimrc
+      ;;
+    "minttyrc")
+      install_minttyrc
+      ;;
+    *)
+      echo "Error: Unknown module."
+      echo "Available: bash gitconfig vim vimrc minttyrc."
+      ;;
+  esac
+
+done
