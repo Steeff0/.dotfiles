@@ -8,7 +8,20 @@ if [[ $# -eq 0 ]]; then
   exit 1
 fi
 
+function isinstalled {
+  if yum list installed "$@" >/dev/null 2>&1; then
+    true
+  else
+    false
+  fi
+}
+
 install_bash() {
+
+  if ! isinstalled "bind-utils"; then
+    sudo yum install -y bind-utils
+  fi
+
   #if an old bashrc file exists make a backup of it
   if [[ -f ~/.bashrc ]]; then
       mv ~/.bashrc ~/.bashrc.old
