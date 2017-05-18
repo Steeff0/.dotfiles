@@ -8,34 +8,6 @@ if [[ $# -eq 0 ]]; then
   exit 1
 fi
 
-# Switch over input parameters and determine logic to execute
-for PARAM in $PARAMS
-do
-
-  case $PARAM in
-    "bash")
-      install_bash
-      ;;
-    "gitconfig")
-      install_gitconfig
-      ;;
-    "vim")
-      install_vim
-      ;;
-    "vimrc")
-      install_vimrc
-      ;;
-    "minttyrc")
-      install_minttyrc
-      ;;
-    *)
-      echo "Error: Unknown module."
-      echo "Available: bash gitconfig vim vimrc minttyrc."
-      ;;
-  esac
-
-done
-
 install_bash() {
   #if an old bashrc file exists make a backup of it
   if [[ -f ~/.bashrc ]]; then
@@ -86,10 +58,30 @@ install_minttyrc() {
   ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
 }
 
+# Switch over input parameters and determine logic to execute
+for PARAM in $PARAMS
+do
 
+  case $PARAM in
+    "bash")
+      install_bash
+      ;;
+    "gitconfig")
+      install_gitconfig
+      ;;
+    "vim")
+      install_vim
+      ;;
+    "vimrc")
+      install_vimrc
+      ;;
+    "minttyrc")
+      install_minttyrc
+      ;;
+    *)
+      echo "Error: Unknown module."
+      echo "Available: bash gitconfig vim vimrc minttyrc."
+      ;;
+  esac
 
-
-
-
-
-
+done
