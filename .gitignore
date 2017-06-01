@@ -1,3 +1,4 @@
 .gitconfig.local
 .vim/plugged/*
 .idea
+.bashrc.sh
