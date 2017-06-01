@@ -24,7 +24,7 @@ install_bash() {
 
   #if an old bashrc file exists make a backup of it
   if [[ -f ~/.bashrc ]]; then
-      mv ~/.bashrc ~/.bashrc.old
+      mv ~/.bashrc ~/.bashrc.local
   fi
 
   #Move own bashrc to default location
