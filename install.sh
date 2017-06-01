@@ -74,6 +74,17 @@ install_minttyrc() {
   ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
 }
 
+fix_ssh_to_443() {
+  if [ ! -f ~/.ssh/config ] || grep "Host github.com" ~/.ssh/config; then
+    sudo tee -a ~/.ssh/config <<EOF
+Host github.com
+  Hostname ssh.github.com
+  Port 443
+
+EOF
+  fi
+}
+
 # Switch over input parameters and determine logic to execute
 for PARAM in $PARAMS
 do
@@ -94,9 +105,12 @@ do
     "minttyrc")
       install_minttyrc
       ;;
+    "sshfix")
+      fix_ssh_to_443
+    ;;
     *)
       echo "Error: Unknown module."
-      echo "Available: bash gitconfig vim vimrc minttyrc."
+      echo "Available: bash gitconfig vim vimrc minttyrc sshfix."
       ;;
   esac
 
