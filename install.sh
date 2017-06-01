@@ -9,18 +9,16 @@ if [[ $# -eq 0 ]]; then
 fi
 
 function isinstalled {
-  if yum list installed "$@" >/dev/null 2>&1; then
-    true
-  else
-    false
-  fi
+  yum list installed "$@" >/dev/null 2>&1 && return 0 || return 1
+}
+
+function hasnpmpackage {
+  npm --global ls | grep "$@" >/dev/null 2>&1 && return 0 || return 1
 }
 
 install_bash() {
 
-  if ! isinstalled "bind-utils"; then
-    sudo yum install -y bind-utils
-  fi
+  isinstalled "bind-utils" || sudo yum install -y bind-utils
 
   #if an old bashrc file exists make a backup of it
   if [[ -f ~/.bashrc ]]; then
@@ -32,6 +30,11 @@ install_bash() {
 }
 
 install_gitconfig() {
+
+  #install needed packages
+  isinstalled "npm" ||sudo yum install -y bind-utils
+  hasnpmpackage "diff-so-fancy" || sudo npm --global install diff-so-fancy
+
   #if an old bashrc file exists make a backup of it
   if [[ -f ~/.gitconfig ]]; then
     mv ~/.gitconfig ~/.gitconfig.old
