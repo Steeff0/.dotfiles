@@ -1,25 +1,9 @@
 [include]
     ; Include local settings
     path = ~/.gitconfig.local
-[push]
-    default = simple
-[core]
-    eol = lf
-    editor = vim
-    fileMode = false
 [alias]
     ; General shortcuts
-    s = status --short
-    sv = status --verbose
     sh = "!f() { git show --patch-with-stat --color "$@" | diff-so-fancy | less --tabs=4 -RFX; }; f"
-    a = add
-    ai = add --interactive
-    ap = add --patch
-    p = push
-    cp = cherry-pick
-    cl = clone
-    co = checkout
-    br = branch
 
     ; Diff and merge
     d = "!f() { git diff --patch-with-stat --color "$@" | diff-so-fancy | less --tabs=4 -RFX; }; f"
@@ -27,11 +11,6 @@
     dc = "!f() { git diff --cached --color "$@" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     dt = difftool
     mt = mergetool
-
-    ; Commit
-    c = commit
-    cm = commit -m
-    ca = commit -a --amend -C HEAD
 
     ; Log
     lol = log --graph --decorate --pretty=oneline --abbrev-commit --all -10
@@ -41,36 +20,25 @@
     ld = log --pretty=format:"%C(yellow)%h\\ %ad%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     ldr = log --pretty=format:"%C(yellow)%h\\ %ad%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 
-    ; Reset
-    r = reset
-    r1 = reset HEAD^
-    r2 = reset HEAD^^
-    rh = reset --hard
-    rh1 = reset HEAD^ --hard
-    rh2 = reset HEAD^^ --hard
-
-    ; Stashing
-    sp = stash --patch
-    sl = stash list
-    sa = stash apply
-    ss = stash save
-    sd = stash drop
-
     ; List aliases
     la = "!git config -l | grep alias | cut -c 7-"
-
-    ; Find files
-    f = "!git ls-files | grep -i"
-
-    ; Grep files
-    grep = grep -Iin
-    gr = grep -Iin
 
     ; Combinations
     ; fetch and status
     fs = "!git fetch -av && git status -v"
     ; add, commit and push
     acp = "!f() { git add . && git commit -m \"$1\" && git push; }; f"
+    cpmp = "!f() {git checkout \"$1\" && git pull && git merge \"$2\" && git push; }; f"
+    branchmerge = "!f() {git checkout \"$1\" && git pull && git checkout \"$2\" && git merge \"$1\" && git push; }; f"
+
+[push]
+    default = simple
+[core]
+    eol = lf
+    autocrlf = input
+    ignorecase = false
+    editor = vim
+    fileMode = false
 [color]
     ui = true
 [diff]
@@ -89,11 +57,16 @@
     tool = vimdiff
     conflictstyle = diff3
     keepBackup = false
+    ff = false
+[pull]
+    rebase = true
 [mergetool]
     prompt = false
 [difftool]
     prompt = false
 [help]
     autocorrect = 50
+[fetch]
+    prune = true
 [diff-so-fancy]
     stripLeadingSymbols = false

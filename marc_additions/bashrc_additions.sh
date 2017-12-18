@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #not supposed to run
 exit 1
 
