@@ -18,7 +18,8 @@ function hasnpmpackage {
 
 install_bash() {
     #install needed packages
-    isinstalled "bind-utils" || sudo yum install -y bind-utils
+    #isinstalled "bind-utils" || sudo yum install -y bind-utils
+    isinstalled "bind-utils" || echo 'WARNING: bashrc needs bind-utils programs like "dig" and "host".'
 
     #if an old bashrc file exists make a backup of it
     if [[ -f ~/.bashrc ]] && [[ ! -f ~/.bashrc.local ]]; then
@@ -33,8 +34,10 @@ install_bash() {
 
 install_gitconfig() {
     #install needed packages
-    isinstalled "npm" ||sudo yum install -y bind-utils
-    hasnpmpackage "diff-so-fancy" || sudo npm --global install diff-so-fancy
+    #isinstalled "npm" ||sudo yum install -y bind-utils
+    isinstalled "npm" || echo "WARNING: gitconfig needs npm installed."
+    #hasnpmpackage "diff-so-fancy" || sudo npm --global install diff-so-fancy
+    hasnpmpackage "diff-so-fancy" || echo "WARNING: gitconfig needs the npm package diff-so-fancy."
 
     #if an old gitconfig file exists make a backup of it
     if [[ -f ~/.gitconfig ]] && [[ ! -f ~/.gitconfig.old ]]; then
@@ -100,29 +103,29 @@ EOF
 for PARAM in $PARAMS
 do
 
-  case $PARAM in
-    "bash")
-      install_bash
-      ;;
-    "gitconfig")
-      install_gitconfig
-      ;;
-    "vim")
-      install_vim
-      ;;
-    "vimrc")
-      install_vimrc
-      ;;
-    "minttyrc")
-      install_minttyrc
-      ;;
-    "sshfix")
-      fix_ssh_to_443
-    ;;
-    *)
-      echo "Error: Unknown module."
-      echo "Available: bash gitconfig vim vimrc minttyrc sshfix."
-      ;;
-  esac
+    case $PARAM in
+        "bash")
+            install_bash
+        ;;
+        "gitconfig")
+            install_gitconfig
+        ;;
+        "vim")
+            install_vim
+        ;;
+        "vimrc")
+            install_vimrc
+        ;;
+        "minttyrc")
+            install_minttyrc
+        ;;
+        "sshfix")
+            fix_ssh_to_443
+        ;;
+        *)
+            echo "Error: Unknown module."
+            echo "Available: bash gitconfig vim vimrc minttyrc sshfix."
+        ;;
+    esac
 
 done
