@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 PARAMS=( "$@" )
 
@@ -8,28 +8,20 @@ if [[ $# -eq 0 ]]; then
     exit 1
 fi
 
-function isinstalled {
-    yum list installed "$@" >/dev/null 2>&1 && return 0 || return 1
-}
-
-function hasnpmpackage {
-    npm --global ls | grep "$@" >/dev/null 2>&1 && return 0 || return 1
-}
-
 install_bash() {
-    #install needed packages
-    #isinstalled "bind-utils" || sudo yum install -y bind-utils
-    isinstalled "bind-utils" || echo 'WARNING: bashrc needs bind-utils programs like "dig" and "host".'
-
     #if an old bashrc file exists make a backup of it
-    if [[ -f ~/.bashrc ]] && [[ ! -f ~/.bashrc.local ]]; then
-        mv ~/.bashrc ~/.bashrc.local
-    elif [[ -f ~/.bashrc ]]; then
-      rm -f ~/.bashrc
+    if [[ -f ~/.bashrc ]]; then
+        local generated=~/.bashrc | grep "#DOTFILES GENERATED"
+
+        if [[ ! -f ~/.bashrc.local ]] && [[ ! generated ]]; then
+            mv ~/.bashrc ~/.bashrc.local
+        fi
+
+        rm -f ~/.bashrc
     fi
 
     #Move own bashrc to default location
-    ln -s ~/.dotfiles/.bashrc ~/.bashrc
+    cp -uf $(PWD)/.bashrc ~/.bashrc
 }
 
 install_gitconfig() {
@@ -48,30 +40,6 @@ install_gitconfig() {
 
     #Move own bashrc to default location
     ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-}
-
-install_vim() {
-    #if an old vim file exists make a backup of it
-    if [[ -f ~/.vim ]] && [[ ! -f ~/.vim.old ]]; then
-        mv ~/.vim ~/.vim.old
-    elif [[ -f ~/.vim ]]; then
-      rm -f ~/.vim
-    fi
-
-    #Move own bashrc to default location
-    ln -s ~/.dotfiles/.vim ~/.vim
-}
-
-install_vimrc() {
-    #if an old vimrc file exists make a backup of it
-    if [[ -f ~/.vimrc ]] && [[ ! -f ~/.vimrc.old ]]; then
-        mv ~/.vimrc ~/.vimrc.old
-    elif [[ -f ~/.vimrc ]]; then
-      rm -f ~/.vimrc
-    fi
-
-    #Move own bashrc to default location
-    ln -s ~/.dotfiles/.vim/vimrc ~/.vimrc
 }
 
 install_minttyrc() {
@@ -102,19 +70,12 @@ EOF
 # Switch over input parameters and determine logic to execute
 for PARAM in $PARAMS
 do
-
     case $PARAM in
         "bash")
             install_bash
         ;;
         "gitconfig")
             install_gitconfig
-        ;;
-        "vim")
-            install_vim
-        ;;
-        "vimrc")
-            install_vimrc
         ;;
         "minttyrc")
             install_minttyrc
@@ -124,8 +85,7 @@ do
         ;;
         *)
             echo "Error: Unknown module."
-            echo "Available: bash gitconfig vim vimrc minttyrc sshfix."
+            echo "Available: bash gitconfig minttyrc sshfix."
         ;;
     esac
-
 done

@@ -1,3 +1,4 @@
+;DOTFILES GENERATED
 [include]
     ; Include local settings
     path = ~/.gitconfig.local
