@@ -50,7 +50,7 @@ export HISTIGNORE='ls:history:ll'
 export HISTTIMEFORMAT='%d-%m-%Y %T '
 
 #Customize prompt
-exec ./promptCommand.sh
+source ./promptCommand.sh
 
 # Set up ssh-agent
 SSH_ENV="$HOME/.ssh/environment"
