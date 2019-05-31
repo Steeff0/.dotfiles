@@ -50,7 +50,7 @@ export HISTIGNORE='ls:history:ll'
 export HISTTIMEFORMAT='%d-%m-%Y %T '
 
 #Customize prompt
-source ./promptCommand.sh
+[ -f ./promptCommand.sh ] && source ./promptCommand.sh
 
 # Userful functions
 function docker-bash {
