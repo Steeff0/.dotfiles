@@ -1,53 +1,59 @@
-#!/usr/bin/env bash
-promptCommand() {
-    #COLOR CODES
-    local GREEN="\[\033[0;32m\]"
-    local CYAN="\[\033[0;36m\]"
-    local BCYAN="\[\033[1;36m\]"
-    local BLUE="\[\033[0;34m\]"
-    local GRAY="\[\033[0;37m\]"
-    local DKGRAY="\[\033[1;30m\]"
-    local WHITE="\[\033[1;37m\]"
-    local RED="\[\033[0;31m\]"
-    # return color to Terminal setting for text color
-    local DEFAULT="\[\033[0;39m\]"
+# Get user without domain
+current_user() {
+    # different prompt and color for root
+    local USER=`whoami`
+    if [[ ${USER} == *"+"* ]]; then
+        USER=`cut -d'+' -f2 <<<"${USER}"`
+    fi
+    echo "${USER}"
+}
 
-    # SET BRANCH
-    local BRANCH=""
-    # if we're in a Git repo, show current branch
-    local GIT_BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-    if [ ! -z ${GIT_BRANCH} ]; then
-        BRANCH=${GIT_BRANCH}
+# get current branch in git repo
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
+		echo "[${BRANCH}${STAT}]"
     elif [ -d ".svn" ]; then
         BRANCH="[ "`svn info | awk '/Last\ Changed\ Rev/ {print $4}'`" ]"
-    fi
-    #Show feature and other specific branches in green. Main branches in red.
-    if [[ ! -z ${BRANCH} ]] && [[ "${BRANCH}" == *"/"* ]]; then
-        BRANCH="${GREEN}[${BRANCH}]${WHITE} || "
-    elif [[ ! -z ${BRANCH} ]]; then
-        BRANCH="${RED}[${BRANCH}]${WHITE} || "
-    fi
+	else
+		echo ""
+	fi
+}
 
-    # SET TIME
-    local TIME=`date +"%H:%M:%S"`
+# get current status of git repo
+function parse_git_dirty {
+	status=`git status 2>&1 | tee`
+	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	bits=''
+	if [ "${renamed}" == "0" ] ||
+	    [ "${newfile}" == "0" ] ||
+	    [ "${untracked}" == "0" ] ||
+	    [ "${deleted}" == "0" ] ||
+	    [ "${dirty}" == "0" ];
+	then
+		bits="!"
+	fi
+	if [ ! "${bits}" == "" ]; then
+		echo " ${bits}"
+	else
+		echo ""
+	fi
+}
 
-    # SET CURRENT PATH
+function current_path {
     local CURRENT_PATH=`echo ${PWD/#$HOME/\~}`
     # trim long path
-    if [ ${#CURRENT_PATH} -gt "35" ]; then
-        CURRENT_PATH=".../${PWD#${PWD%/*/*/*}/}/"
+    if [ ${#CURRENT_PATH} -gt "50" ]; then
+        echo ".../${PWD#${PWD%/*/*/*/*/*/*}/}/"
+    else
+        echo "${CURRENT_PATH}"
     fi
-
-    # different prompt and color for root
-    local PR_COLORED="${GREEN}$"
-    local USERNAME_COLORED="${GREEN}${USER}"
-    if [ "$UID" = "0" ]; then
-        PR_COLORED="${RED}#"
-        USERNAME_COLORED="${RED}${USER}$"
-    fi
-
-    local TOP_LINE="${CYAN}[ ${GRAY}${TIME} ${WHITE}|| ${BRANCH}${GRAY}${CURRENT_PATH}${CYAN}]"
-    local BOTTOM_LINE="${CYAN}[${USERNAME_COLORED}${WHITE}@${GRAY}${HOSTNAME}${CYAN}]${PR_COLORED}${DEFAULT} "
-    export PS1="\n${TOP_LINE}\n${BOTTOM_LINE}"
 }
-PROMPT_COMMAND=promptCommand
+
+export PS1="\[\e]0;$PWD\007\]\n\[\e[32m\]\`current_user\`@\h\[\e[m\] \[\e[33m\]\`current_path\`\[\e[m\] \[\e[36m\]\`parse_git_branch\`\[\e[m\]\n\[\e[0m\]$"

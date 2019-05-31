@@ -11,10 +11,11 @@ fi
 install_bash() {
     #if an old bashrc file exists make a backup of it
     if [[ -f ~/.bashrc ]]; then
-        local generated=~/.bashrc | grep "#DOTFILES GENERATED"
 
-        if [[ ! -f ~/.bashrc.local ]] && [[ ! generated ]]; then
-            mv ~/.bashrc ~/.bashrc.local
+        if [[ ! -f ~/bashrc.local ]] && [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
+            cp ~/.bashrc >> ~/bashrc.local
+        elif [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
+            cp ~/.bashrc >> ~/bashrc.bac
         fi
 
         rm -f ~/.bashrc
@@ -27,15 +28,20 @@ install_bash() {
 install_gitconfig() {
     #install needed packages
     #isinstalled "npm" ||sudo yum install -y bind-utils
-    isinstalled "npm" || echo "WARNING: gitconfig needs npm installed."
+    #isinstalled "npm" || echo "WARNING: gitconfig needs npm installed."
     #hasnpmpackage "diff-so-fancy" || sudo npm --global install diff-so-fancy
-    hasnpmpackage "diff-so-fancy" || echo "WARNING: gitconfig needs the npm package diff-so-fancy."
+    #hasnpmpackage "diff-so-fancy" || echo "WARNING: gitconfig needs the npm package diff-so-fancy."
 
-    #if an old gitconfig file exists make a backup of it
-    if [[ -f ~/.gitconfig ]] && [[ ! -f ~/.gitconfig.old ]]; then
-        mv ~/.gitconfig ~/.gitconfig.old
-    elif [[ -f ~/.gitconfig ]]; then
-      rm -f ~/.gitconfig
+    #if an old bashrc file exists make a backup of it
+    if [[ -f ~/.gitconfig ]]; then
+
+        if [[ ! -f ~/gitconfig.local ]] && [[ ! $(grep ";DOTFILES GENERATED" ~/.gitconfig) ]]; then
+            cp ~/.gitconfig >> ~/gitconfig.local
+        elif [[ ! $(grep ";DOTFILES GENERATED" ~/.bashrc) ]]; then
+            cp ~/.gitconfig >> ~/gitconfig.bac
+        fi
+
+        rm -f ~/.gitconfig
     fi
 
     #Move own bashrc to default location
@@ -55,15 +61,18 @@ install_minttyrc() {
 }
 
 fix_ssh_to_443() {
-    if [ ! -f ~/.ssh/config ] || grep "Host github.com" ~/.ssh/config; then
-        sudo tee -a ~/.ssh/config <<EOF
+    if [ ! -f ~/.ssh/config ] || [[ ! $(grep "Host github.com" ~/.ssh/config) ]]; then
+        cat << EOF >> ~/.ssh/config
 Host github.com
     Hostname ssh.github.com
     Port 443
+	User git
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa
-
 EOF
+        echo "Added"
+    else
+        echo "Host github.com already defined in ~/.ssh/config"
     fi
 }
 
