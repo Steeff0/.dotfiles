@@ -1,0 +1,50 @@
+[user]
+	name = "Steven Gerritsen"
+[alias]
+	; Log
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all -10
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	; only branch data
+	lolb = log --graph --decorate --pretty=oneline --abbrev-commit -10
+	lolab = log --graph --decorate --pretty=oneline --abbrev-commit
+	ls = log --pretty=format:"%C(yellow)%h%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --all --graph
+	ll = log --pretty=format:"%C(yellow)%h%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	ldr = log --pretty=format:"%C(yellow)%h\\ %ad%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	; Diff
+    ds = diff --stat
+
+	; List aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+[push]
+	default = simple
+[core]
+	eol = lf
+	autocrlf = input
+	ignorecase = false
+	editor = vim
+	fileMode = false
+[fetch]
+	prune = true
+[diff]
+    tool = vimdiff
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+    ff = false
+[color]
+	ui = true
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = red bold
+	untracked = red bold
+[pull]
+    rebase = true
+[url "https://github.com/"]
+	insteadOf = git@github.com:
