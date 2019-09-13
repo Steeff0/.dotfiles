@@ -52,6 +52,16 @@ export HISTTIMEFORMAT='%d-%m-%Y %T '
 #Customize prompt
 source ./promptCommand.sh
 
+# Userful functions
+function docker-bash {
+	container=$1
+	if [ -z "${container}" ]; then
+		echo "The 'docker-bash' command needs a container name as parameter"
+	else
+		winpty docker exec -it "${container}" bash
+	fi
+}
+
 # Set up ssh-agent
 SSH_ENV="$HOME/.ssh/environment"
 function activate_agent {
