@@ -1,11 +1,13 @@
 #DOTFILES GENERATED
-# Source local definitions.
-if [ -f ~/.bashrc.local ]; then
-  . ~/.bashrc.local
-fi
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+echo "Start loading bash defaults"
+
+#Customize prompt
+[ -f ~/.bash_ps1 ] && source ~/.bash_ps1
+
+# Source local definitions.
+[ -f ~/.bashrc_local ] && source ~/.bashrc_local
 
 # Set terminal title through xterm control sequence
 echo -ne "\e]0;$(hostname)\a"
@@ -13,6 +15,8 @@ echo -ne "\e]0;$(hostname)\a"
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
+elif [ -f /etc/bash.bashrc ]; then
+	source /etc/bash.bashrc
 fi
 
 # Enable bash completion in interactive shells
@@ -34,6 +38,10 @@ alias mkdir='mkdir -p'
 alias cl='clear'
 alias h='history'
 alias less='less -r'
+alias d='winpty docker'
+alias dc='docker-compose'
+alias k='kubectrl'
+
 # List bash aliases
 la() {
     # Currently all my aliases are in .bashrc
@@ -49,9 +57,6 @@ export HISTCONTROL=ignorespace
 export HISTIGNORE='ls:history:ll'
 export HISTTIMEFORMAT='%d-%m-%Y %T '
 
-#Customize prompt
-[ -f ./promptCommand.sh ] && source ./promptCommand.sh
-
 # Userful functions
 function docker-bash {
     container=$1
@@ -66,6 +71,7 @@ function docker-bash {
 SSH_ENV="$HOME/.ssh/environment"
 function activate_agent {
     echo "Initializing new SSH agent..."
+    [ -f "${SSH_ENV}" ] && rm -f $SSH_ENV
     touch $SSH_ENV
     chmod 600 "${SSH_ENV}"
     /usr/bin/ssh-agent | sed 's/^echo/#echo/' >> "${SSH_ENV}"

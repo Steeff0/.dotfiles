@@ -12,10 +12,10 @@ install_bash() {
     #if an old bashrc file exists make a backup of it
     if [[ -f ~/.bashrc ]]; then
 
-        if [[ ! -f ~/bashrc.local ]] && [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
-            cat ~/.bashrc >> ~/bashrc.local
+        if [[ ! -f ~/bashrc_local ]] && [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
+            cat ~/.bashrc >> ~/bashrc_local
         elif [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
-            cat ~/.bashrc >> ~/bashrc.bac
+            cat ~/.bashrc >> ~/bashrc_bac
         fi
 
         rm -f ~/.bashrc
@@ -36,8 +36,8 @@ install_gitconfig() {
     #if an old bashrc file exists make a backup of it
     if [[ -f ~/.gitconfig ]]; then
 
-        if [[ ! -f ~/gitconfig.local ]] && [[ ! $(grep ";DOTFILES GENERATED" ~/.gitconfig) ]]; then
-            cat ~/.gitconfig >> ~/gitconfig.local
+        if [[ ! -f ~/gitconfig_local ]] && [[ ! $(grep ";DOTFILES GENERATED" ~/.gitconfig) ]]; then
+            cat ~/.gitconfig >> ~/gitconfig_local
         elif [[ ! $(grep ";DOTFILES GENERATED" ~/.bashrc) ]]; then
             cat ~/.gitconfig >> ~/gitconfig.bac
         fi

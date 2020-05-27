@@ -1,7 +1,7 @@
 ;DOTFILES GENERATED
 [include]
     ; Include local settings
-    path = ~/.gitconfig.local
+    path = ~/.gitconfig_local
 [user]
 	name = "Steven Gerritsen"
 [alias]
