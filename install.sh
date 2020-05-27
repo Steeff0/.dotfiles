@@ -70,11 +70,29 @@ fix_ssh_to_443() {
 Host github.com
     Hostname ssh.github.com
     Port 443
-	User git
+    User git
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa
 EOF
         echo "Added"
+    else
+        echo "Host github.com already defined in ~/.ssh/config"
+    fi
+}
+
+fix_blocked_ssh_by_proxy() {
+    if [ ! -f ~/.ssh/config ] || [[ ! $(grep "Host github.com" ~/.ssh/config) ]]; then
+        cat << EOF >> ~/.ssh/config
+Host github.com
+    Hostname ssh.github.com
+    ProxyCommand connect.exe -H [proxy_url:proxy_port] %h %p
+    Port 443
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa
+    IdentitiesOnly yes
+EOF
+        echo "Added"
+        echo "you still have to open file '~/.ssh/config' and set the correct proxy settings"
     else
         echo "Host github.com already defined in ~/.ssh/config"
     fi
@@ -93,12 +111,15 @@ do
         "minttyrc")
             install_minttyrc
         ;;
-        "sshfix")
+        "sshfix443")
             fix_ssh_to_443
+        ;;
+        "sshfixproxy")
+            fix_blocked_ssh_by_proxy
         ;;
         *)
             echo "Error: Unknown module."
-            echo "Available: bash gitconfig minttyrc sshfix."
+            echo "Available: bash gitconfig minttyrc sshfix sshfixproxy."
         ;;
     esac
 done
