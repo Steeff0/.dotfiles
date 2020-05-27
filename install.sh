@@ -12,16 +12,17 @@ install_bash() {
     #if an old bashrc file exists make a backup of it
     if [[ -f ~/.bashrc ]]; then
 
-        if [[ ! -f ~/bashrc.local ]] && [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
-            cp ~/.bashrc >> ~/bashrc.local
+        if [[ ! -f ~/bashrc_local ]] && [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
+            cat ~/.bashrc >> ~/bashrc_local
         elif [[ ! $(grep "#DOTFILES GENERATED" ~/.bashrc) ]]; then
-            cp ~/.bashrc >> ~/bashrc.bac
+            cat ~/.bashrc >> ~/bashrc_bac
         fi
 
         rm -f ~/.bashrc
     fi
 
     #Move own bashrc to default location
+    cp -uf $(PWD)/.bash_ps1 ~/bash_ps1
     cp -uf $(PWD)/.bashrc ~/.bashrc
 }
 
@@ -35,29 +36,32 @@ install_gitconfig() {
     #if an old bashrc file exists make a backup of it
     if [[ -f ~/.gitconfig ]]; then
 
-        if [[ ! -f ~/gitconfig.local ]] && [[ ! $(grep ";DOTFILES GENERATED" ~/.gitconfig) ]]; then
-            cp ~/.gitconfig >> ~/gitconfig.local
+        if [[ ! -f ~/gitconfig_local ]] && [[ ! $(grep ";DOTFILES GENERATED" ~/.gitconfig) ]]; then
+            cat ~/.gitconfig >> ~/gitconfig_local
         elif [[ ! $(grep ";DOTFILES GENERATED" ~/.bashrc) ]]; then
-            cp ~/.gitconfig >> ~/gitconfig.bac
+            cat ~/.gitconfig >> ~/gitconfig.bac
         fi
 
         rm -f ~/.gitconfig
     fi
 
     #Move own bashrc to default location
-    ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+    cp -uf $(PWD)/.gitconfig ~/.gitconfig
 }
 
 install_minttyrc() {
     #if an old bashrc file exists make a backup of it
-    if [[ -f ~/.minttyrc ]] && [[ ! -f ~/.minttyrc.old ]]; then
-        mv ~/.minttyrc ~/.minttyrc.old
-    elif [[ -f ~/.minttyrc ]]; then
-      rm -f ~/.minttyrc
+    if [[ -f ~/.minttyrc ]]; then
+
+        if [[ ! $(grep "#DOTFILES GENERATED" ~/.minttyrc) ]]; then
+            cat ~/.minttyrc > ~/minttyrc.old
+        fi
+
+        rm -f ~/.minttyrc
     fi
 
     #Move own bashrc to default location
-    ln -s ~/.dotfiles/.minttyrc ~/.minttyrc
+    cp -uf $(PWD)/.minttyrc ~/.minttyrc
 }
 
 fix_ssh_to_443() {
