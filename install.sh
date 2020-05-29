@@ -22,7 +22,7 @@ install_bash() {
     fi
 
     #Move own bashrc to default location
-    cp -uf $(PWD)/.bash_ps1 ~/bash_ps1
+    cp -uf $(PWD)/.bash_ps1 ~/.bash_ps1
     cp -uf $(PWD)/.bashrc ~/.bashrc
 }
 
