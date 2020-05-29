@@ -3,9 +3,6 @@
 [ -z "$PS1" ] && return
 echo "Start loading bash defaults"
 
-#Customize prompt
-[ -f ~/.bash_ps1 ] && source ~/.bash_ps1
-
 # Source local definitions.
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
 
@@ -14,10 +11,13 @@ echo -ne "\e]0;$(hostname)\a"
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+    source /etc/bashrc
 elif [ -f /etc/bash.bashrc ]; then
 	source /etc/bash.bashrc
 fi
+
+#Customize prompt
+[ -f ~/.bash_ps1 ] && source ~/.bash_ps1
 
 # Enable bash completion in interactive shells
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
