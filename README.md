@@ -7,7 +7,6 @@ I don't suggest you go using these files without understanding what they do. But
 ## TODO
 * Update gitconfig
 * Update bashrc
-* .editorconfig
-* .npmrc
+* Add .npmrc
 * update readme
 * License
