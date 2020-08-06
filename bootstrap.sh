@@ -22,8 +22,9 @@ install_bash() {
     fi
 
     #Move own bashrc to default location
-    cp -uf $(PWD)/.bash_ps1 ~/.bash_ps1
-    cp -uf $(PWD)/.bashrc ~/.bashrc
+    ln -s $(PWD)/.bash_prompt ~/.bash_prompt
+    ln -s $(PWD)/.bash_profile ~/.bash_profile
+    ln -s $(PWD)/.bashrc ~/.bashrc
 }
 
 install_gitconfig() {

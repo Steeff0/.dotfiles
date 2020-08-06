@@ -1,5 +1,5 @@
 # Get user without domain
-current_user() {
+function current_user() {
     # different prompt and color for root
     local USER=`whoami`
     if [[ ${USER} == *"+"* ]]; then
@@ -14,7 +14,11 @@ function parse_git_branch() {
 	if [ ! "${BRANCH}" == "" ]
 	then
 		STAT=`parse_git_dirty`
-		echo "[${BRANCH}${STAT}]"
+		if [[ "${BRANCH}" == "master" ]]; then
+			echo -e '\e[31m'"[${BRANCH}${STAT}]"     		# change to red
+		else
+			echo -e '\e[36m'"[${BRANCH}${STAT}]"     		# change to cyan
+		fi
     elif [ -d ".svn" ]; then
         BRANCH="[ "`svn info | awk '/Last\ Changed\ Rev/ {print $4}'`" ]"
 	else
@@ -56,4 +60,27 @@ function current_path {
     fi
 }
 
-export PS1="\[\e]0;$PWD\007\]\n\[\e[32m\]\`current_user\`@\h\[\e[m\] \[\e[33m\]\`current_path\`\[\e[m\] \[\e[36m\]\`parse_git_branch\`\[\e[m\]\n\[\e[0m\]$"
+function current_docker_env {
+	if [ "$(echo $DOCKER_ENV)" == ""  ] || [ "$(echo $DOCKER_ENV)" == "LOCAL" ]; then
+		echo ""
+	elif [[ "$(echo $DOCKER_ENV)" == "prod" ]]; then
+		echo -e '\e[31m'"[DOCKER ENV: ${DOCKER_ENV}] "       		# change to red
+	else
+		echo -e '\e[35m'"[DOCKER ENV: ${DOCKER_ENV}] "       		# change to purple
+	fi
+}
+
+PS1='\[\e]0;$PWD\007\]' 			# set window title
+PS1="$PS1"'\n'                 		# new line
+PS1="$PS1"'\[\e[32m\]'     			# change to green
+PS1="$PS1\`current_user\`@\h "   	# user@host<space>
+PS1="$PS1"'\[\e[33m\]'     			# change to brownish yellow
+PS1="$PS1\`current_path\` "      	# current working directory
+PS1="$PS1\`parse_git_branch\` "  	# get git information
+PS1="$PS1"'\[\e[0m\]'        		# change color
+PS1="$PS1\n"               			# new line
+PS1="$PS1\`current_docker_env\`"	# show docker env
+PS1="$PS1"'\[\e[0m\]'        		# change color
+PS1="$PS1$ "               			# prompt: always $
+
+MSYS2_PS1="$PS1"               		# for detection by MSYS2 SDK's bash.basrc

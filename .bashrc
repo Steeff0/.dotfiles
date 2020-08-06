@@ -17,7 +17,7 @@ elif [ -f /etc/bash.bashrc ]; then
 fi
 
 #Customize prompt
-[ -f ~/.bash_ps1 ] && source ~/.bash_ps1
+[ -f ~/.bash_prompt ] && source ~/.bash_prompt
 
 # Enable bash completion in interactive shells
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
