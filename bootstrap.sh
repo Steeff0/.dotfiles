@@ -1,14 +1,28 @@
 #!/usr/bin/env bash
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${DOTFILES_DIR}/bash_functions.d/shell.sh
 
 # Make symlink in the home folder to .dotfiles if not exists.
 # This way scripts can keep referring to .dotfiles directory even if this is on another location.
 if [ ! -d "${HOME}/.dotfiles" ]; then
-    ln -s DOTFILES_DIR ${HOME}/.dotfiles
+    link DOTFILES_DIR ${HOME}/.dotfiles
 fi
 
-source ${DOTFILES_DIR}/bash_functions.d/shell.sh
+function backupFile(){
+    backupDir="${HOME}/.dotfiles_old"
+    fileToBackup=$1
+
+    # To make sure the backup is unique (in case of doing this more often), add a short sha of the file
+    shaChecksum=$(sha256sum ${fileToBackup})
+    shaChecksum=${shaChecksum:0:10}
+
+    # Make a folder as backup location for existing dotfiles.
+    if [ ! -d "${backupDir}" ]; then
+        mkdir ${backupDir}
+    fi
+    cp -f ${fileToBackup} "${backupDir}/$(basename $fileToBackup)_${shaChecksum}_old"
+}
 
 processFile() {
     if [ $# -lt 2 ]; then
@@ -16,58 +30,43 @@ processFile() {
         exit 1
     fi
     sourceFile=$1
-    SymlinkFileLocation=$2
-    backupDir="${HOME}/.dotfiles_old"
+    symlinkFile=$2
 
     if [ ! -f $sourceFile ]; then
         echo "File ${sourceFile} doesn't exists"
         exit 1
     fi
 
-    createLocal=false
-    if [ $# -gt 2 ] && [$3 = true]; then
+    if [ $# -ge 3 ] && [ $3 = true ]; then
         createLocal=true
     fi
 
     #if an old bashrc file exists make a backup of it
-    if [[ -f ${SymlinkFileLocation} ]]; then
-        fileToBackup="$SymlinkFileLocation"
+    if [ -f ${symlinkFile} ]; then
+        if [ ! -L ${symlinkFile} ]; then
+            # It is not a symlink so sets backup the file before we continue
+            if [ "${createLocal}" = true ] && [ -f "${symlinkFile}_local" ]; then
+                # If we have to create a local and it already exists, backup the old local
+                # Then move the symlink file to file_local
+                backupFile "${symlinkFile}_local"
+                rm "${symlinkFile}_local"
+                cp -f ${symlinkFile} "${symlinkFile}_local"
 
-        # If we want to create a local file and it already exists it needs a back-up
-        # If it doesn't exists yet, nothing needs a back-up
-        if [ ${createLocal} = true ]; then
-            if [ -f "${SymlinkFileLocation}_local" ]; then
-                fileToBackup="${SymlinkFileLocation}_local"
+            elif [ "${createLocal}" = true ]; then
+                # There  is no file_local so just move the file
+                cp -f ${symlinkFile} "${symlinkFile}_local"
+
             else
-                fileToBackup=""
+                # Just backup the file
+                backupFile "$symlinkFile"
+
             fi
         fi
-
-        if [[ -f ${fileToBackup} ]] && [[ ! -L ${fileToBackup} ]]; then
-            # To make sure the backup is unique (in case of doing this more often), add a short sha of the file
-            shaChecksum=$(sha256sum ${fileToBackup})
-            shaChecksum=${shaChecksum:0:10}
-
-            # Make a folder as backup location for existing dotfiles.
-            if [ ! -d "${backupDir}" ]; then
-                mkdir ${backupDir}
-            fi
-            mv -f ${fileToBackup} "${backupDir}/$(basename $fileToBackup)_${shaChecksum}_old"
-        fi
-
-        # If we want to create a local file, then move the old file to file_local
-        if [ ${createLocal} = true ]; then
-            mv -f ${SymlinkFileLocation} "${SymlinkFileLocation}_local"
-        fi
-
-        # It is a symlink just remove it.
-        if [ -L ${SymlinkFileLocation} ]; then
-            rm -f ${SymlinkFileLocation}
-        fi
+        rm -f "$symlinkFile"
     fi
 
     # Create symlink form source to destination
-    link ${sourceFile} ${SymlinkFileLocation}
+    link ${sourceFile} ${symlinkFile}
 }
 
 processFile ${DOTFILES_DIR}/.bash_profile ${HOME}/.bash_profile

@@ -2,6 +2,6 @@
 BoldAsFont=-1
 Locale=en_US
 Charset=UTF-8
-FontHeight=12
+FontHeight=10
 Font=Consolas
 ScrollbackLines=1000000
