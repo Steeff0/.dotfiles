@@ -15,3 +15,4 @@ I don't suggest you go using these files without understanding what they do. But
 * Add .npmrc
 * update readme
 * License
+* Global gitignore

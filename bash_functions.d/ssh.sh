@@ -28,6 +28,7 @@ Host github.com
     User git
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa
+    IdentitiesOnly yes
 EOF
         echo "Added"
     else
