@@ -70,8 +70,8 @@ processFile() {
     link ${sourceFile} ${SymlinkFileLocation}
 }
 
-#processFile ${DOTFILES_DIR}/.bash_profile ${HOME}/.bash_profile true
-#processFile ${DOTFILES_DIR}/.bashrc ${HOME}/.bashrc true
-#processFile ${DOTFILES_DIR}/.gitconfig ${HOME}/.gitconfig
-#processFile ${DOTFILES_DIR}/.minttyrc ${HOME}/.minttyrc
-processFile "${DOTFILES_DIR}/.editorconfig" "${HOME}/.editorconfig"
+processFile ${DOTFILES_DIR}/.bash_profile ${HOME}/.bash_profile
+processFile ${DOTFILES_DIR}/.bashrc ${HOME}/.bashrc true
+processFile ${DOTFILES_DIR}/.gitconfig ${HOME}/.gitconfig true
+processFile ${DOTFILES_DIR}/.minttyrc ${HOME}/.minttyrc
+processFile ${DOTFILES_DIR}/.editorconfig ${HOME}/.editorconfig
