@@ -9,7 +9,6 @@ I don't suggest you go using these files without understanding what they do. But
 3. Edit however you want this to be
 4. Run bootstrap.sh
 
-## 
+## TODO
 * Add .npmrc?
 * update readme
-* License
