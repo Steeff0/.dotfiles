@@ -1,4 +1,4 @@
-fix_blocked_ssh_by_proxy() {
+function fix_blocked_ssh_by_proxy() {
     if [ -z "$1" ] && [ -z "$2" ]; then
         echo "The 'fix_blocked_ssh_by_proxy' function needs a host and port as parameters"
         exit 1
@@ -19,7 +19,7 @@ EOF
     fi
 }
 
-fix_ssh_to_443() {
+function fix_ssh_to_443() {
     if [ ! -f ~/.ssh/config ] || [[ ! $(grep "Host github.com" ~/.ssh/config) ]]; then
         cat << EOF >> ~/.ssh/config
 Host github.com

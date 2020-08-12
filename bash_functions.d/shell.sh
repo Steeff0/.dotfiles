@@ -1,10 +1,10 @@
 # Check if this is Windows.
-isWindows() { [[ -n "$WINDIR" ]]; }
+function isWindows() { [[ -n "$WINDIR" ]]; }
 
 # Cross-platform symlink function. It needs two parameters.
 # It will create a symlink to a file or directory, with syntax:
 # link $sourceLocation $symlinkLocation
-link() {
+function link() {
     source=$1
     symlink=$2
     if isWindows; then
