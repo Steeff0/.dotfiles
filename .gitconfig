@@ -2,6 +2,7 @@
 [include]
     ; Include local settings
     path = ~/.gitconfig_local
+    path = ~/.gitconfig_proxy
 [user]
 	name = "Steven Gerritsen"
 [alias]
