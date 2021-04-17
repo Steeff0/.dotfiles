@@ -30,7 +30,7 @@ alias mkdir='mkdir -p'
 alias cl='clear'
 alias h='history'
 alias less='less -r'
-alias kc='kubectrl'
+alias kc='kubectl'
 
 # List bash aliases
 la() {
