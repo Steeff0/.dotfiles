@@ -1,18 +1,5 @@
 #!/bin/bash
 
-# Replacement of the windows nvm executable that doesn't touch your env vars when you use use, and can handle .nvmrc files
-function nvmi() {
-    if [ $# -ge 1 ] && [ "${1}" == "use" ] && [ -f .nvmrc ]; then
-        version="$(cat .nvmrc)"
-        nvm_use $version
-    elif [ "${1}" == "use" ]; then
-        shift
-        nvm_use $@
-    else
-        nvm $@
-    fi
-}
-
 # Replacement of the windows nvm use function that doesn't touch your env vars
 function nvm_use() {
     if [ $# -ge 1 ]; then
@@ -50,6 +37,19 @@ function nvm_use() {
                 mv "${NVM_HOME}/v${version}/node32.exe" "${NVM_HOME}/v${version}/node.exe"
             fi
         fi
+    else
+        nvm $@
+    fi
+}
+
+# Replacement of the windows nvm executable that doesn't touch your env vars when you use use, and can handle .nvmrc files
+function nvmi() {
+    if [ $# -ge 1 ] && [ "${1}" == "use" ] && [ -f .nvmrc ]; then
+        version="$(cat .nvmrc)"
+        nvm_use $version
+    elif [ "${1}" == "use" ]; then
+        shift
+        nvm_use $@
     else
         nvm $@
     fi
