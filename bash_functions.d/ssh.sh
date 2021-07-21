@@ -1,3 +1,9 @@
+#!/bin/bash
+
+function htpasswd() {
+    npx htpasswd $@
+}
+
 function fix_blocked_ssh_by_proxy() {
     if [ -z "$1" ] && [ -z "$2" ]; then
         echo "The 'fix_blocked_ssh_by_proxy' function needs a host and port as parameters"
