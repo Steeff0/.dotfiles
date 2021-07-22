@@ -7,35 +7,28 @@ function nvm_use() {
         if [ -d "${NVM_HOME}/v${version}" ]; then
 
             if [ -d "${NVM_SYMLINK}" ]; then
-                rm -rf $NVM_SYMLINK
+                rm -rf "${NVM_SYMLINK}"
             fi
 
             link "${NVM_HOME}/v${version}" "${NVM_SYMLINK}"
-        else
-            nvm install $version
 
-            if [ $? -eq 0 ]; then
-                nvm_use $version
+            # Make sure the node executable has the correct name
+            if [ -f "${NVM_HOME}/v${version}/node.exe" ]; then
+                if [ -f "${NVM_HOME}/v${version}/node64.exe" ]; then
+                    mv "${NVM_HOME}/v${version}/node.exe" "${NVM_HOME}/v${version}/node32.exe"
+                    mv "${NVM_HOME}/v${version}/node64.exe" "${NVM_HOME}/v${version}/node.exe"
+                fi
+
             else
-                echo "Could not install version $1, use `nvm install ${version}` to install node"
-                exit 1
+                if [ -f "${NVM_HOME}/v${version}/node64.exe" ]; then
+                    mv "${NVM_HOME}/v${version}/node64.exe" "${NVM_HOME}/v${version}/node.exe"
+                elif [ -f "${NVM_HOME}/v${version}/node32.exe" ]; then
+                    mv "${NVM_HOME}/v${version}/node32.exe" "${NVM_HOME}/v${version}/node.exe"
+                fi
             fi
-
-        fi
-
-        # Make sure the node executable has the correct name
-        if [ -f "${NVM_HOME}/v${version}/node.exe" ]; then
-            if [ -f "${NVM_HOME}/v${version}/node64.exe" ]; then
-                mv "${NVM_HOME}/v${version}/node.exe" "${NVM_HOME}/v${version}/node32.exe"
-                mv "${NVM_HOME}/v${version}/node64.exe" "${NVM_HOME}/v${version}/node.exe"
-            fi
-
         else
-            if [ -f "${NVM_HOME}/v${version}/node64.exe" ]; then
-                mv "${NVM_HOME}/v${version}/node64.exe" "${NVM_HOME}/v${version}/node.exe"
-            elif [ -f "${NVM_HOME}/v${version}/node32.exe" ]; then
-                mv "${NVM_HOME}/v${version}/node32.exe" "${NVM_HOME}/v${version}/node.exe"
-            fi
+            echo "Node version is not installed. Please first run 'nvm install Node ${version}' then try nvm use again"
+            exit 1
         fi
     else
         nvm $@

@@ -20,6 +20,8 @@ function link() {
         else
             cmd <<< "mklink \"${windowsSymlink}\" \"${windowsSource}\"" > /dev/null
         fi
+        source=$windowsSource
+        symlink=$windowsSymlink
     else
         # You know what? I think ln's parameters are backwards.
         ln -s "$source" "$symlink"
