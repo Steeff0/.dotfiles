@@ -83,6 +83,12 @@ function traefik {
     elif [ "${command}" == "restart" ]; then
         echo "Restarting traefik"
         docker-compose -f ${TRAEFIK_HOME}/docker-compose.yml restart
+    elif [ "${command}" == "status" ]; then
+        if [ ! -z $(docker ps -qf  name=traefik) ]; then
+            echo "Traefik status: UP"
+        else
+            echo "Traefik status: DOWN"
+        fi
     else
         echo """
 The traefik command can be used by using 'traefik <command>'. The command options are:
@@ -90,6 +96,7 @@ The traefik command can be used by using 'traefik <command>'. The command option
     up:         Starts the traefik container
     down/stop:  Stop the traefik container
     restart:    Restarts the traefik container
+    status:     Shows the status of the traefik container
         """
     fi
 }
