@@ -69,6 +69,7 @@ function traefik {
     command="${1}"
     if [ -z "${TRAEFIK_HOME}" ]; then
         echo "TRAEFIK_HOME variable not set."
+        return 1
     fi
     if [ "${command}" == "up" ]; then
         echo "Starting traefik"
