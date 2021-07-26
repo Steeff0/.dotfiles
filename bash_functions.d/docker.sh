@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Userful functions
 function docker-exec {
     if [ ! $# -ge 2 ]; then

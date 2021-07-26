@@ -64,3 +64,31 @@ done
 
 # Source local definitions.
 [ -f ~/.bashrc_local ] && source ~/.bashrc_local
+
+function traefik {
+    command="${1}"
+    if [ -z "${TRAEFIK_HOME}" ]; then
+        echo "TRAEFIK_HOME variable not set."
+    fi
+    if [ "${command}" == "up" ]; then
+        echo "Starting traefik"
+        docker-compose -f ${TRAEFIK_HOME}/docker-compose.yml up -d
+    elif [ "${command}" == "down" ]; then
+        echo "Stopping traefik"
+        docker-compose -f ${TRAEFIK_HOME}/docker-compose.yml stop
+    elif [ "${command}" == "stop" ]; then
+        echo "Stopping traefik"
+        docker-compose -f ${TRAEFIK_HOME}/docker-compose.yml stop
+    elif [ "${command}" == "restart" ]; then
+        echo "Restarting traefik"
+        docker-compose -f ${TRAEFIK_HOME}/docker-compose.yml restart
+    else
+        echo """
+The traefik command can be used by using 'traefik <command>'. The command options are:
+
+    up:         Starts the traefik container
+    down/stop:  Stop the traefik container
+    restart:    Restarts the traefik container
+        """
+    fi
+}

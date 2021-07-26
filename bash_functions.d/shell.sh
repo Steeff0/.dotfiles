@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check if this is Windows.
 function isWindows() { [[ -n "$WINDIR" ]]; }
 
