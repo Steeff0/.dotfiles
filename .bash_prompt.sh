@@ -1,5 +1,5 @@
 # Get user without domain
-function current_user() {
+function __user_ps1() {
     # different prompt and color for root
     local USER=`whoami`
     if [[ ${USER} == *"+"* ]]; then
@@ -9,11 +9,11 @@ function current_user() {
 }
 
 # get current branch in git repo
-function parse_git_branch() {
+function __git_ps1() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${BRANCH}" == "" ]
 	then
-		STAT=`parse_git_dirty`
+		STAT=`__git_dirty_ps1`
 		if [[ "${BRANCH}" == "master" ]]; then
 			echo -e '\e[31m'"[${BRANCH}${STAT}]"     		# change to red
 		else
@@ -27,7 +27,7 @@ function parse_git_branch() {
 }
 
 # get current status of git repo
-function parse_git_dirty {
+function __git_dirty_ps1() {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
 	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
@@ -50,17 +50,17 @@ function parse_git_dirty {
 	fi
 }
 
-function current_path {
-    local CURRENT_PATH=`echo ${PWD/#$HOME/\~}`
-    # trim long path
-    if [ ${#CURRENT_PATH} -gt "50" ]; then
-        echo ".../${PWD#${PWD%/*/*/*/*/*/*}/}/"
-    else
-        echo "${CURRENT_PATH}"
-    fi
+function __path_ps1 {
+  case $PWD in
+    $HOME) echo "~";;
+    $HOME/*/*/*) echo "${PWD#"${PWD%/*/*/*}/"}";;
+    $HOME/*/*) echo "~/${PWD#"${PWD%/*/*}/"}";;
+    /*/*/*) echo "${PWD#"${PWD%/*/*/*}/"}";;
+    *) echo "$PWD";;
+  esac
 }
 
-function current_docker_env {
+function __docker_ps1 {
 	if [ "$(echo $DOCKER_ENV)" == ""  ] || [ "$(echo $DOCKER_ENV)" == "LOCAL" ]; then
 		echo ""
 	elif [[ "$(echo $DOCKER_ENV)" == "prod" ]]; then
@@ -73,13 +73,14 @@ function current_docker_env {
 PS1='\[\e]0;$PWD\007\]' 			# set window title
 PS1="$PS1"'\n'                 		# new line
 PS1="$PS1"'\[\e[32m\]'     			# change to green
-PS1="$PS1\`current_user\`@\h "   	# user@host<space>
+PS1="$PS1"'\D{%d/%m/%Y} \t: '       # time & date
+# PS1="$PS1\`__user_ps1\`@\h "   	    # user@host<space>
 PS1="$PS1"'\[\e[33m\]'     			# change to brownish yellow
-PS1="$PS1\`current_path\` "      	# current working directory
-PS1="$PS1\`parse_git_branch\` "  	# get git information
+PS1="$PS1\`__path_ps1\` "      	    # current working directory
+PS1="$PS1\`__git_ps1\` "  	        # get git information
 PS1="$PS1"'\[\e[0m\]'        		# change color
 PS1="$PS1\n"               			# new line
-PS1="$PS1\`current_docker_env\`"	# show docker env
+PS1="$PS1\`__docker_ps1\`"	        # show docker env
 PS1="$PS1"'\[\e[0m\]'        		# change color
 PS1="$PS1$ "               			# prompt: always $
 

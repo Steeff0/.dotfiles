@@ -9,6 +9,17 @@ fi
 # Check that we haven't already been sourced.
 ([[ -z ${DOTFILES_BASHRC} ]] && DOTFILES_BASHRC="1") || return
 
+function __get_bash_dir() {
+    local BASHRC_SOURCE="${BASH_SOURCE[0]}"
+    while [ -h "$BASHRC_SOURCE" ]; do # resolve $BASHRC_SOURCE until the file is no longer a symlink
+      local BASHRC_DIR="$( cd -P "$( dirname "$BASHRC_SOURCE" )" && pwd )"
+      local BASHRC_SOURCE="$(readlink "$BASHRC_SOURCE")"
+      [[ $BASHRC_SOURCE != /* ]] && BASHRC_SOURCE="$BASHRC_DIR/$BASHRC_SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    echo "$( cd -P "$( dirname "$BASHRC_SOURCE" )" && pwd )"
+}
+DOTFILES_DIR="$(__get_bash_dir)"
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 echo "Start loading bash defaults"
@@ -22,7 +33,7 @@ export TERM=cygwin
 echo -ne "\e]0;$(hostname)\a"
 
 #Customize prompt
-[ -f ~/.dotfiles/.bash_prompt ] && source ~/.dotfiles/.bash_prompt
+[ -f ${DOTFILES_DIR}/.bash_prompt.sh ] && source ${DOTFILES_DIR}/.bash_prompt.sh
 
 # Various
 alias ll='ls -alh --color=auto'
@@ -58,7 +69,7 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Source all functions from bash_functions.d
-for f in ~/.dotfiles/bash_functions.d/*; do
+for f in ${DOTFILES_DIR}/bash_functions.d/*; do
     source $f;
 done
 
@@ -84,7 +95,7 @@ function traefik {
         echo "Restarting traefik"
         docker-compose -f ${TRAEFIK_HOME}/docker-compose.yml restart
     elif [ "${command}" == "status" ]; then
-        if [ ! -z $(docker ps -qf  name=traefik) ]; then
+        if [ ! -z $(docker ps -qf name=traefik) ]; then
             echo "Traefik status: UP"
         else
             echo "Traefik status: DOWN"

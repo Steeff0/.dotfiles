@@ -25,7 +25,7 @@
     default = simple
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
-	excludesfile = ~/.dotfiles/.gitignore
+	excludesfile = ~/.gitignore
     eol = lf
     autocrlf = input
     ignorecase = false
