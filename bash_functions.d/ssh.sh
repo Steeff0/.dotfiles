@@ -9,7 +9,7 @@ function fix_blocked_ssh_by_proxy() {
         echo "The 'fix_blocked_ssh_by_proxy' function needs a host and port as parameters"
         exit 1
     fi
-    if [ ! -f ~/.ssh/config ] || [[ ! $(grep "Host github.com" ~/.ssh/config) ]]; then
+    if [[ ! $(grep "Host github.com" ~/.ssh/config) ]]; then
         cat << EOF >> ~/.ssh/config
 Host github.com
     Hostname ssh.github.com
@@ -21,12 +21,12 @@ Host github.com
 EOF
         echo "Added"
     else
-        echo "Host github.com already defined in ~/.ssh/config"
+        echo "Host github.com already defined in ~/.ssh/config add \"ProxyCommand connect.exe -H [{{host}}:{{port}}] %h %p\" to the config"
     fi
 }
 
 function fix_ssh_to_443() {
-    if [ ! -f ~/.ssh/config ] || [[ ! $(grep "Host github.com" ~/.ssh/config) ]]; then
+    if [[ ! $(grep "Host github.com" ~/.ssh/config) ]]; then
         cat << EOF >> ~/.ssh/config
 Host github.com
     Hostname ssh.github.com
@@ -38,7 +38,7 @@ Host github.com
 EOF
         echo "Added"
     else
-        echo "Host github.com already defined in ~/.ssh/config"
+        echo "Host github.com already defined in ~/.ssh/config add \"Port 443\" to the config"
     fi
 }
 
