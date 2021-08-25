@@ -53,9 +53,9 @@ function __git_dirty_ps1() {
 function __path_ps1 {
   case $PWD in
     $HOME) echo "~";;
-    $HOME/*/*/*) echo "${PWD#"${PWD%/*/*/*}/"}";;
-    $HOME/*/*) echo "~/${PWD#"${PWD%/*/*}/"}";;
-    /*/*/*) echo "${PWD#"${PWD%/*/*/*}/"}";;
+    $HOME/*/*/*) echo "~/.../${PWD#"${PWD%/*/*/*}/"}";;
+    $HOME/*) echo "~/${PWD#"${HOME}/"}";;
+    /*/*/*) echo ".../${PWD#"${PWD%/*/*/*}/"}";;
     *) echo "$PWD";;
   esac
 }
