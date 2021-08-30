@@ -55,7 +55,7 @@ function __path_ps1 {
     $HOME) echo "~";;
     $HOME/*/*/*) echo "~/.../${PWD#"${PWD%/*/*/*}/"}";;
     $HOME/*) echo "~/${PWD#"${HOME}/"}";;
-    /*/*/*) echo ".../${PWD#"${PWD%/*/*/*}/"}";;
+    /*/*/*/*) echo ".../${PWD#"${PWD%/*/*/*}/"}";;
     *) echo "$PWD";;
   esac
 }
