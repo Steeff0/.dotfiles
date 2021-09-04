@@ -24,11 +24,6 @@ DOTFILES_DIR="$(__get_bash_dir)"
 [ -z "$PS1" ] && return
 echo "Start loading bash defaults"
 
-# Export localization variables
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export TERM=cygwin
-
 # Set terminal title through xterm control sequence
 echo -ne "\e]0;$(hostname)\a"
 
