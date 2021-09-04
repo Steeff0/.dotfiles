@@ -40,7 +40,7 @@ alias less='less -r'
 alias kc='kubectl'
 
 # List bash aliases
-la() {
+function la() {
     # Currently all my aliases are in .bashrc
     grep "^alias" ~/.bashrc  | cut -c 7- | sort
 }
