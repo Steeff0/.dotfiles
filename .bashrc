@@ -38,6 +38,7 @@ alias cl='clear'
 alias h='history'
 alias less='less -r'
 alias kc='kubectl'
+alias npm-no-cache-install='echo "LEEROY JENKINS ! ! !" && rm -rf node_modules && rm -rf package-lock.json && npm cache clean -f && npm install --cache ./tmp && rm -rf tmp'
 
 # List bash aliases
 function la() {
