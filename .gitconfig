@@ -6,9 +6,13 @@
 [user]
 	name = "Steven Gerritsen"
 [alias]
+	; commit
+	commit = commit -S
+
 	; Log
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all -10
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	
 	; only branch data
 	lolb = log --graph --decorate --pretty=oneline --abbrev-commit -10
 	lolab = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -16,6 +20,7 @@
 	ll = log --pretty=format:"%C(yellow)%h%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	ld = log --pretty=format:"%C(yellow)%h\\ %ad%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 	ldr = log --pretty=format:"%C(yellow)%h\\ %ad%C(auto)%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	
 	; Diff
     ds = diff --stat
 
