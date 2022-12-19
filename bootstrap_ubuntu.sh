@@ -69,9 +69,7 @@ processFile() {
     link ${sourceFile} ${symlinkFile}
 }
 
-processFile ${DOTFILES_DIR}/.bash_profile ${HOME}/.bash_profile
-processFile ${DOTFILES_DIR}/.bashrc ${HOME}/.bashrc true
+processFile ${DOTFILES_DIR}/ubuntu/.bash_aliases ${HOME}/.bash_aliases true
 processFile ${DOTFILES_DIR}/.gitconfig ${HOME}/.gitconfig true
 processFile ${DOTFILES_DIR}/.gitignore ${HOME}/.gitignore
-processFile ${DOTFILES_DIR}/.minttyrc ${HOME}/.minttyrc
 processFile ${DOTFILES_DIR}/.editorconfig ${HOME}/.editorconfig
